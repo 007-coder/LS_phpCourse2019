@@ -40,7 +40,14 @@ require (__DIR__.'/src/functions.php');
     
     
     <h3>Задание #2</h3>
-    <p><?php echo task2('+', 1, 2, 3, 5.2); ?></p>
+    <p><?php     
+    $d1 = 1; $d2 = 2; $d3 = 3; $d4 = 5.2;    
+    echo 'Числа: '. $d1 . ' | '. $d2 . ' | ' . $d3 . ' | ' . $d4 . ' | ';
+     ?></p>
+    <p><?php echo '<b>+</b> &nbsp;&nbsp; '. task2('+', $d1, $d2, $d3, $d4); ?></p>
+    <p><?php echo '<b>-</b> &nbsp;&nbsp; '. task2('-', $d1, $d2, $d3, $d4); ?></p>
+    <p><?php echo '<b>*</b> &nbsp;&nbsp; '. task2('*', $d1, $d2, $d3, $d4); ?></p>
+    <p><?php echo '<b>/</b> &nbsp;&nbsp; '. task2('/', $d1, $d2, $d3, $d4); ?></p>
 
     
     <h3>Задание #3</h3>

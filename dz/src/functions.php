@@ -1,58 +1,92 @@
 <?php 
 
-function task1($stringsArray = [], $singleLine = false) {    
-    if (count($stringsArray)) {
-        $ret1 = $ret2 = '';
-        foreach ($stringsArray as $string) {
-            $ret1 .= $string.' | ';
-            $ret2 .= '<p>'.$string.'</p>';
-        }
-
-        if ($singleLine) {
-            return '<p>'.$ret1.'</p>';
-        } else {
-            return $ret2;
-        }
+function task1($stringsArray = [], $singleLine = false) {        
+    $ret1 = $ret2 = '';
+    foreach ($stringsArray as $string) {
+        $ret1 .= $string.' | ';
+        $ret2 .= '<p>'.$string.'</p>';
     }
+
+    if ($singleLine) {
+        return '<p>'.$ret1.'</p>';
+    } else {
+        return $ret2;
+    }
+    
 }
 
 
-function task2($op = '+', $d1 = 0, $d2 = 0, $d3 = 0, $d4 = 0, $d5 = 0) {
-    $op = (is_string($op) && in_array($op, ['+','-','*','/']) && $op !='') ? $op : '+';    
-    $d1 = (is_numeric($d1)) ? $d1 : 0;
-    $d2 = (is_numeric($d2)) ? $d2 : 0;
-    $d3 = (is_numeric($d3)) ? $d3 : 0;
-    $d4 = (is_numeric($d4)) ? $d4 : 0;
-    $d5 = (is_numeric($d5)) ? $d5 : 0;
+function task2($op = '+') {
+    $args = func_get_args();
+    $nums = [];
 
-    switch ($op) {
-        case '-':
-            return $d1 - $d2 - $d3 - $d4 - $d5;
-            break;
-        case '*':
-            return $d1 * $d2 * $d3 * $d4 * $d5;
-            break;
-        case '/':
-            return $d1 / $d2 / $d3 / $d4 / $d5;
-            break;
+    foreach ($args as $k => $arg) {
+        if ($k === 0) {
+            $op =  (is_string($arg) && in_array($arg, ['+','-','*','/']) ) ? $arg : '+'; 
+        } else {
+            $nums[] = (is_numeric($arg)) ? $arg : 0;
+        }
+    }    
 
-        
-        default:
-            return $d1 + $d2 + $d3 + $d4 + $d5;
-            break;
+    if (count($nums)) {
+        $ret = 0;
+
+        switch ($op) {
+            case '-':
+                foreach ($nums as $k => $num) {
+                    if ($k === 0) {
+                        $ret = $num;    
+                    } else {
+                        $ret -= $num; 
+                    } 
+                }
+                return $ret;
+                break;
+            case '*':
+                foreach ($nums as $k => $num) {
+                    if ($k === 0) {
+                        $ret = $num;    
+                    } else {
+                        $ret *= $num; 
+                    } 
+                }
+                return $ret;
+                break;
+            case '/':
+                foreach ($nums as $k => $num) {
+                    if ($k === 0) {
+                        $ret = $num;    
+                    } else {
+                        $ret /= $num; 
+                    } 
+                }
+                return $ret;
+                break;
+
+            
+            default:
+                foreach ($nums as $k => $num) {
+                    if ($k === 0) {
+                        $ret = $num;    
+                    } else {
+                        $ret += $num; 
+                    } 
+                }
+                return $ret;
+                break;
+        }
     }
+    
 
 }  
 
 
-function task3($_cols = 0, $_rows = 0) {
-    $_cols = (is_integer($_cols) && $_cols > 0) ? $_cols : 0;
-    $_rows = (is_integer($_rows) && $_rows > 0) ? $_rows : 0;
+function task3($_cols = 0, $_rows = 0) { 
 
-    $cols = ($_cols > 0) ? range(1, $_cols) : [];
-    $rows = ($_rows > 0) ? range(1, $_rows) : [];    
+    $cols = (is_integer($_cols) && $_cols > 0) ? range(1, $_cols) : [];
+    $rows = (is_integer($_rows) && $_rows > 0) ? range(1, $_rows) : [];    
 
-    if ($_rows > 0 && $_rows > 0 ) {
+    if (!empty($cols) && !empty($rows) ) {
         $html = 
         '<table>
             <thead>';
@@ -84,9 +118,9 @@ function task3($_cols = 0, $_rows = 0) {
 
 
 
-    } else if ($_cols === 0) {
+    } else if (empty($cols)) {
         return 'Colls error!';
-    } else if ($_rows === 0) {
+    } else if (empty($rows)) {
         return 'Rows error!';
     }
 
