@@ -54,11 +54,17 @@ function task2($op = '+') {
                 break;
             case '/':
                 foreach ($nums as $k => $num) {
-                    if ($k === 0) {
-                        $ret = $num;    
+                    if ($num === 0) {
+                        return 'Деление на 0';
+                        break;
                     } else {
-                        $ret /= $num; 
-                    } 
+                        if ($k === 0) {
+                            $ret = $num;    
+                        } else {
+                            $ret /= $num; 
+                        }     
+                    }
+                    
                 }
                 return $ret;
                 break;
