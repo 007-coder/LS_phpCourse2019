@@ -29,57 +29,38 @@ function task2($op = '+') {
     }    
 
     if (count($nums)) {
-        $ret = 0;
+        $ret = $nums[0];
 
         switch ($op) {
+            case '+':               
+                for ($i=1; $i < count($nums); $i++) { 
+                    $ret += $nums[$i]; 
+                }                                                
+                return $ret;           
+
             case '-':
-                foreach ($nums as $k => $num) {
-                    if ($k === 0) {
-                        $ret = $num;    
-                    } else {
-                        $ret -= $num; 
-                    } 
-                }
-                return $ret;
-                break;
+                for ($i=1; $i < count($nums); $i++) { 
+                    $ret -= $nums[$i]; 
+                }                                                
+                return $ret;           
+
             case '*':
-                foreach ($nums as $k => $num) {
-                    if ($k === 0) {
-                        $ret = $num;    
-                    } else {
-                        $ret *= $num; 
-                    } 
-                }
-                return $ret;
-                break;
+                for ($i=1; $i < count($nums); $i++) { 
+                    $ret *= $nums[$i]; 
+                }                                                
+                return $ret;           
+
             case '/':
-                foreach ($nums as $k => $num) {
-                    if ($num === 0) {
-                        return 'Деление на 0';
-                        break;
+                for ($i=1; $i < count($nums); $i++) { 
+                    if ($nums[$i] > 0 ) {
+                        $ret /= $nums[$i];                        
                     } else {
-                        if ($k === 0) {
-                            $ret = $num;    
-                        } else {
-                            $ret /= $num; 
-                        }     
+                        return 'Деление на 0';                        
                     }
                     
-                }
-                return $ret;
-                break;
-
-            
-            default:
-                foreach ($nums as $k => $num) {
-                    if ($k === 0) {
-                        $ret = $num;    
-                    } else {
-                        $ret += $num; 
-                    } 
-                }
-                return $ret;
-                break;
+                }                
+                return $ret;                                                  
+                
         }
     }
     
@@ -124,10 +105,8 @@ function task3($_cols = 0, $_rows = 0) {
 
 
 
-    } else if (empty($cols)) {
-        return 'Colls error!';
-    } else if (empty($rows)) {
-        return 'Rows error!';
+    } else if (empty($cols) || empty($rows)) {
+        return 'error!';
     }
 
 }
